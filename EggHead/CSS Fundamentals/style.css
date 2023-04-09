@@ -1,0 +1,17 @@
+ul{
+  color: blue;
+}
+
+li{
+  color:red
+}
+
+.home{
+  color: inherit;
+}
+
+.box{
+  width: 100px;
+  height: 100px;
+  background: blue;
+}
