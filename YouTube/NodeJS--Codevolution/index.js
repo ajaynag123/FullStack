@@ -1,24 +1,16 @@
-// // const EventEmitter = require('node:events');
+// 
 
-// // const emitter = new EventEmitter();
+const fs = require('node:fs/promises');
 
-// // emitter.on('order-pizza', (size, topping) => {
-// //   console.log(`Order recevid, ${size}${topping}`);
-// // })
+//fs.readFile('./abc.txt', 'utf-8').then((data) => console.log(data)).catch(err => console.log(err));
 
-// // emitter.emit('order-pizza', 'large', 'mushroom');
+async function readFile() {
+  try {
+    const data = await fs.readFile('./file.txt', 'utf-8');
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-// import PizzaShop from './pizza-shop.mjs';
-
-// const pizzaShop = new PizzaShop();
-
-// pizzaShop.order();
-// pizzaShop.order();
-// pizzaShop.displayOrderNumber();
-// pizzaShop.displayOrderNumber();
-
-const buffer = new Buffer.from('Vishwas');
-
-buffer.write('AmruthaVarshini');
-console.log(buffer.toString());
-console.log(buffer.toJSON());
+readFile();
