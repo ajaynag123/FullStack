@@ -1,24 +1,12 @@
-const http = require('node:http');
-const fs = require('node:fs')
+const crypto = require('node:crypto');
 
-const server = http.createServer((req, res) => {
-  const person = { name: 'ajay', age: 45 }
-  if (req.url === '/') {
-    res.writeHead(200, { "Content-type": 'text/plain' });
-    res.end('Home page')
-  }
-  else if (req.url === '/about') {
-    res.writeHead(200, { "Content-type": 'text/plain' });
-    res.end('About page')
-  } else if (req.url === '/api') {
-    res.writeHead(200, { 'Content-type': 'text/plain' });
-    res.end(JSON.stringify(person))
-  } else {
-    res.writeHead(404)
-    res.end('Page not found');
-  }
-})
+process.env.UV_THREADPOOL_SIZE = 25;
+const MAX_CALLS = 25;
 
-server.listen(3000, () => {
-  console.log('Server listening');
-})
+
+const start = Date.now();
+for (let i = 0; i < MAX_CALLS; i++) {
+  crypto.pbkdf2('password', 'salt', 100000, 512, 'sha512', () => {
+    console.log(`Hash: ${i + 1}`, Date.now() - start);
+  });
+}
